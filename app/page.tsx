@@ -1,3 +1,4 @@
+import Grid from "../components/Grid";
 import VideoWindow from "../components/VideoWindow";
 
 export interface WindowData {
@@ -34,6 +35,7 @@ const initialWindows: WindowData[] = [
 export default function Page() {
     return (
         <main className="relative h-screen w-screen cursor-default overflow-hidden">
+            <Grid />
             <VideoWindow windows={initialWindows} videoSrc="/video.mp4" />
         </main>
     );
