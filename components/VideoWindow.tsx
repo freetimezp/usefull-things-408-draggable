@@ -1,12 +1,17 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
+import gsap from "gsap";
 
 import { WindowData } from "../app/page";
+import { useGSAP } from "@gsap/react";
+import { Draggable } from "gsap/all";
 
 interface VideoWindowProps {
     windows: WindowData[];
     videoSrc: string;
 }
+
+gsap.registerPlugin(Draggable, useGSAP);
 
 const VideoWindow = ({ windows, videoSrc }: VideoWindowProps) => {
     const containerRef = useRef<HTMLDivElement>(null);
@@ -74,6 +79,70 @@ const VideoWindow = ({ windows, videoSrc }: VideoWindowProps) => {
             }
         };
     }, [windows]);
+
+    useGSAP(() => {
+        const windowEls = gsap.utils.toArray<HTMLElement>(".window");
+
+        gsap.to(windowEls, {
+            scale: 1,
+            duration: 1,
+            ease: "expo.out",
+            stagger: 0.08,
+        });
+
+        windowEls.forEach((windowEl) => {
+            const width = windowEl.offsetWidth;
+            const height = windowEl.offsetHeight;
+            const rect = windowEl.getBoundingClientRect();
+            const initialLeft = rect.left;
+            const initialTop = rect.top;
+
+            const windowId = windowEl.getAttribute("data-id");
+
+            Draggable.create(windowEl, {
+                type: "x,y",
+                bounds: {
+                    minX: -(initialLeft + width / 2),
+                    maxX: window.innerWidth - (initialLeft + width / 2),
+                    minY: -(initialTop + height / 2),
+                    maxY: window.innerHeight - (initialTop + height / 2),
+                },
+                inertia: true,
+                throwResistance: 100000,
+                onPress: function () {
+                    if (!windowId) return;
+
+                    maxZIndex.current += 1;
+                    const newZIndex = maxZIndex.current;
+
+                    gsap.set(windowEl, { zIndex: newZIndex });
+
+                    const canvas = canvasRefs.current.get(windowId);
+                    if (canvas) {
+                        gsap.set(canvas, { zIndex: newZIndex });
+                    }
+
+                    setWindowZIndexes((prev) => ({
+                        ...prev,
+                        [windowId]: newZIndex,
+                    }));
+                },
+                onDrag: function () {
+                    const currentRect = windowEl.getBoundingClientRect();
+
+                    if (windowId) {
+                        setWindowPositions((prev) => ({
+                            ...prev,
+                            [windowId]: {
+                                x: Math.round(currentRect.left),
+                                y: Math.round(currentRect.top),
+                            },
+                        }));
+                    }
+                },
+            });
+        });
+    });
 
     return (
         <>
