@@ -1,3 +1,4 @@
+import GrainEffect from "../components/GrainEffect";
 import Grid from "../components/Grid";
 import VideoWindow from "../components/VideoWindow";
 
@@ -36,6 +37,7 @@ export default function Page() {
     return (
         <main className="relative h-screen w-screen cursor-default overflow-hidden">
             <Grid />
+            <GrainEffect />
             <VideoWindow windows={initialWindows} videoSrc="/video.mp4" />
         </main>
     );
