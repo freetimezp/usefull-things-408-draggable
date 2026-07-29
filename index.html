@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="./assets/css/style.css" />
+        <title>Project</title>
+    </head>
+
+    <body>
+        <main class="scene">
+            <!-- ================================= -->
+            <!-- SHARED VIDEO SOURCE -->
+            <!-- ================================= -->
+            <video
+                id="source-video"
+                src="/assets/videos/video.mp4"
+                autoplay
+                muted
+                loop
+                playsinline
+            ></video>
+            <!-- ================================= -->
+            <!-- GRID -->
+            <!-- ================================= -->
+            <div class="grid"></div>
+            <!-- ================================= -->
+            <!-- WINDOWS -->
+            <!-- ================================= -->
+            <div
+                class="window"
+                data-id="w1"
+                style="--x: 138px; --y: 88px; --width: 650px"
+            >
+                <div class="video-view"></div>
+                <div class="window-info">
+                    <span class="x"> X: 0138PX </span>
+                    <span class="y"> Y: 0088PX </span>
+                </div>
+            </div>
+            <div
+                class="window"
+                data-id="w2"
+                style="--x: 278px; --y: 269px; --width: 350px"
+            >
+                <div class="video-view"></div>
+                <div class="window-info">
+                    <span class="x"> X: 0278PX </span>
+                    <span class="y"> Y: 0269PX </span>
+                </div>
+            </div>
+            <div
+                class="window"
+                data-id="w3"
+                style="--x: 278px; --y: 518px; --width: 600px"
+            >
+                <div class="video-view"></div>
+                <div class="window-info">
+                    <span class="x"> X: 0278PX </span>
+                    <span class="y"> Y: 0518PX </span>
+                </div>
+            </div>
+            <div
+                class="window"
+                data-id="w4"
+                style="--x: 1197px; --y: 86px; --width: 500px"
+            >
+                <div class="video-view"></div>
+                <div class="window-info">
+                    <span class="x"> X: 1197PX </span>
+                    <span class="y"> Y: 0086PX </span>
+                </div>
+            </div>
+            <div
+                class="window"
+                data-id="w5"
+                style="--x: 154px; --y: 513px; --width: 300px"
+            >
+                <div class="video-view"></div>
+                <div class="window-info">
+                    <span class="x"> X: 0154PX </span>
+                    <span class="y"> Y: 0513PX </span>
+                </div>
+            </div>
+            <div
+                class="window"
+                data-id="w6"
+                style="--x: 668px; --y: 155px; --width: 700px"
+            >
+                <div class="video-view"></div>
+                <div class="window-info">
+                    <span class="x"> X: 0668PX </span>
+                    <span class="y"> Y: 0155PX </span>
+                </div>
+            </div>
+
+            <!-- RETRO EFFECT -->
+            <canvas id="retro" class="retro"></canvas>
+
+            <!-- FILM GRAIN -->
+            <canvas id="grain" class="grain"></canvas>
+        </main>
+
+        <script src="./assets/js/grain.js"></script>
+        <script src="./assets/js/retro.js"></script>
+
+        <script src="./assets/js/main.js"></script>
+    </body>
+</html>
